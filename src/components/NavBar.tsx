@@ -1,10 +1,12 @@
 import { HStack, Image } from '@chakra-ui/react';
 import rockstar from '../assets/rockstar.webp';
+import ToggleTheme from './ToggleTheme';
 
 const NavBar = () => {
   return (
-    <HStack>
-          <Image src={ rockstar } boxSize='60px'/>
+    <HStack justifyContent='space-between' padding='10px'>
+          <Image src={rockstar} boxSize='60px' />
+          <ToggleTheme />
     </HStack>
   )
 }
