@@ -33,3 +33,8 @@ export type GameAction = {
   type: string;
   payload?: Game[] | string | (() => void | null);
 };
+
+export type Dimension = {
+  x: number,
+  y: number
+}
