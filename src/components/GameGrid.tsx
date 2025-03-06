@@ -1,5 +1,6 @@
+import GameCard from './GameCard';
 import { useGames } from './redux/hooks';
-import { Text } from '@chakra-ui/react';
+import { SimpleGrid, Text } from '@chakra-ui/react';
 
 const GameGrid = () => {
   const { results, error } = useGames();
@@ -7,11 +8,15 @@ const GameGrid = () => {
   return (
     <>
       {error && <Text>{error}</Text>}
-      <ul>
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+        spacing={10}
+        padding={10}
+      >
         {results.map((result) => (
-          <li key={result.id}>{result.name}</li>
+          <GameCard key={result.id} game={result} />
         ))}
-      </ul>
+      </SimpleGrid>
     </>
   );
 };
