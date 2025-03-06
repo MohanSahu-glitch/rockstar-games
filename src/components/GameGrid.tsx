@@ -1,15 +1,8 @@
-import { useEffect } from "react";
-import { useGames } from "./redux/hooks";
-import { fetchGames } from "./redux/Games/GamesAction";
-import { Text } from "@chakra-ui/react";
-
+import { useGames } from './redux/hooks';
+import { Text } from '@chakra-ui/react';
 
 const GameGrid = () => {
-
-  const { results, error, dispatch } = useGames();
-    useEffect(() => {
-      dispatch(fetchGames());
-    }, [dispatch])
+  const { results, error } = useGames();
 
   return (
     <>
@@ -21,6 +14,6 @@ const GameGrid = () => {
       </ul>
     </>
   );
-}
+};
 
 export default GameGrid;

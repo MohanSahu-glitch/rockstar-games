@@ -1,4 +1,6 @@
+import { isVoidFunction } from '../../../helpers';
 import {
+  FETCH_CANCEL,
   FETCH_ERROR,
   FETCH_REQUEST,
   FETCH_SUCCESS,
@@ -6,6 +8,7 @@ import {
   GameAction,
 } from '../../../types';
 
+const noop = () => {};
 const initialState: FetchGame = {
   isLoading: false,
   response: {
@@ -13,6 +16,7 @@ const initialState: FetchGame = {
     count: 0,
   },
   error: '',
+  cancel: noop
 };
 
 function gameReducer(state = initialState, action: GameAction): FetchGame {
@@ -41,6 +45,13 @@ function gameReducer(state = initialState, action: GameAction): FetchGame {
           ? action.payload
           : state.error
       };
+    case FETCH_CANCEL:
+      return {
+        ...state,
+        cancel: (isVoidFunction(action.payload)
+          ? action.payload
+          : state.cancel)
+      }
     default:
       return state;
   }
