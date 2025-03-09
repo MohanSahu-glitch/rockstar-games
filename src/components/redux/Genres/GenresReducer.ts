@@ -1,14 +1,14 @@
 import {
-  CANCEL_GAMES,
-  ERROR_GAMES,
-  GET_GAMES,
-  LOADING_GAMES,
+  CANCEL_GENRES,
+  ERROR_GENRES,
+  GET_GENRES,
+  LOADING_GENRES,
 } from '../../../constants';
 import { isVoidFunction } from '../../../helpers';
-import { FetchGame, GameAction } from '../../../types';
+import { FetchGenre, GenreAction } from '../../../types';
 
 const noop = () => {};
-const initialState: FetchGame = {
+const initialState: FetchGenre = {
   isLoading: false,
   response: {
     results: [],
@@ -18,14 +18,14 @@ const initialState: FetchGame = {
   cancel: noop,
 };
 
-function gameReducer(state = initialState, action: GameAction): FetchGame {
+function genreReducer(state = initialState, action: GenreAction): FetchGenre {
   switch (action.type) {
-    case LOADING_GAMES:
+    case LOADING_GENRES:
       return {
         ...state,
         isLoading: true,
       };
-    case GET_GAMES:
+    case GET_GENRES:
       return {
         ...state,
         isLoading: false,
@@ -36,14 +36,14 @@ function gameReducer(state = initialState, action: GameAction): FetchGame {
             : [...state.response.results],
         },
       };
-    case ERROR_GAMES:
+    case ERROR_GENRES:
       return {
         ...state,
         isLoading: false,
         error:
           typeof action.payload === 'string' ? action.payload : state.error,
       };
-    case CANCEL_GAMES:
+    case CANCEL_GENRES:
       return {
         ...state,
         cancel: isVoidFunction(action.payload) ? action.payload : state.cancel,
@@ -53,4 +53,4 @@ function gameReducer(state = initialState, action: GameAction): FetchGame {
   }
 }
 
-export default gameReducer;
+export default genreReducer;
