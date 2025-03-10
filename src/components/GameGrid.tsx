@@ -1,11 +1,11 @@
 import GameCard from './GameCard';
 import GameCardSkeleton from './GameCardSkeleton';
 import { SimpleGrid, Text } from '@chakra-ui/react';
-import { useEntities } from './redux/hooks';
+import { useGames } from './redux/hooks';
 import { Game } from '../types';
 
 const GameGrid = () => {
-  const { results, error, isLoading } = useEntities<Game>('games');
+  const { results, error, isLoading } = useGames();
 
   return (
     <>

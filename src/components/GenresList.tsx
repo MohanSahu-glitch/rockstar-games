@@ -1,8 +1,8 @@
 import { Genre } from '../types';
-import { useEntities } from './redux/hooks';
+import { useGenres } from './redux/hooks';
 
 const GenresList = () => {
-  const { results } = useEntities<Genre>('genres');
+  const { results } = useGenres();
   return (
     <ul>
       {(results as Genre[]) &&

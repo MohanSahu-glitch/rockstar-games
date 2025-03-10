@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import store, { AppDispatch, RootState } from './store';
+import { AppDispatch, RootState } from './store';
 import { useEffect } from 'react';
 import { fetchEntities } from './Entity/EntityAction';
 import { selectResults, selectIsLoading, selectError } from './selectors';
+import { Game, Genre } from '../../types';
 
 //Call the API and gets the state for the respective entities
-export function useEntities<T>(entity: string) {
+function useEntities<T>(entity: string) {
   const results = useSelector((state: RootState) =>
     selectResults(state, entity),
   ) as T[];
@@ -21,7 +22,8 @@ export function useEntities<T>(entity: string) {
     dispatch(fetchEntities<T>(entity));
   }, [dispatch, entity]);
 
-  console.log(store.getState());
-
   return { results, error, isLoading, dispatch };
 }
+
+export const useGames = () => useEntities<Game>('games');
+export const useGenres = () => useEntities<Genre>('genres');
