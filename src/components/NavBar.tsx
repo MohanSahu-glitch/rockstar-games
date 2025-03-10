@@ -4,7 +4,7 @@ import ToggleTheme from './ToggleTheme';
 
 const NavBar = () => {
   return (
-    <HStack justifyContent='space-between' padding='10px'>
+    <HStack justifyContent='space-between' padding='15px'>
           <Image src={rockstar} boxSize='60px' />
           <ToggleTheme />
     </HStack>
