@@ -1,12 +1,12 @@
-import { useGenres } from './redux/hooks';
+import { Genre } from '../types';
+import { useEntities } from './redux/hooks';
 
 const GenresList = () => {
-  const { results } = useGenres();
+  const { results } = useEntities<Genre>('genres');
   return (
     <ul>
-      {results.map((genre) => (
-        <li key={genre.id}>{genre.name}</li>
-      ))}
+      {(results as Genre[]) &&
+        results.map((genre) => <li key={genre.id}>{genre.name}</li>)}
     </ul>
   );
 };

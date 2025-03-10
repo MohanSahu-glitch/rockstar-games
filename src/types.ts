@@ -17,39 +17,24 @@ export type Platform = {
   name: string;
 };
 
-export type GameResponse = {
-  results: Game[];
-  count: number;
+export type EntityResponse<T> = {
+  results: T[];
 };
 
-export type GenreResponse = {
-  results: Genre[];
-  count: number;
-};
-
-export type FetchGame = {
+export type FetchEntity<T> = {
   isLoading: boolean;
-  response: GameResponse;
+  response: EntityResponse<T>;
   error: string;
   cancel: () => void;
 };
 
-export type FetchGenre = {
-  isLoading: boolean;
-  response: GenreResponse;
-  error: string;
-  cancel: () => void;
+export type EntityAction<T> = {
+  type: string;
+  entity: string; //Used for endpoint which concatenates with base URL. Refer api-client.ts
+  payload?: T[] | string | (() => void);
 };
 
-export type GameAction = {
-  type: string;
-  payload?: Game[] | string | (() => void | null);
-};
-
-export type GenreAction = {
-  type: string;
-  payload?: Genre[] | string | (() => void | null);
-};
+export type EntitiesState = Record<string, FetchEntity<unknown>>;
 
 export type Dimension = {
   x: number;

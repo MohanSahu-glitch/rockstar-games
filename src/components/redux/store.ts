@@ -1,19 +1,12 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import gameReducer from './Games/GamesReducer';
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { thunk } from 'redux-thunk';
-import genreReducer from './Genres/GenresReducer';
-
-const rootReducer = combineReducers({
-  game: gameReducer,
-  genre: genreReducer,
-});
+import entityReducer from './Entity/EntityReducer';
 
 const store = createStore(
-  rootReducer,
+  entityReducer,
   composeWithDevTools(applyMiddleware(thunk)),
 );
-
 export default store;
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof entityReducer>;
 export type AppDispatch = typeof store.dispatch;

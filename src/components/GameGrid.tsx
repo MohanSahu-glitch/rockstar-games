@@ -1,10 +1,11 @@
 import GameCard from './GameCard';
 import GameCardSkeleton from './GameCardSkeleton';
-import { useGames } from './redux/hooks';
 import { SimpleGrid, Text } from '@chakra-ui/react';
+import { useEntities } from './redux/hooks';
+import { Game } from '../types';
 
 const GameGrid = () => {
-  const { results, error, isLoading } = useGames();
+  const { results, error, isLoading } = useEntities<Game>('games');
 
   return (
     <>
@@ -18,9 +19,8 @@ const GameGrid = () => {
           Array.from({ length: 20 }).map((_, index) => (
             <GameCardSkeleton key={index} />
           ))}
-        {results.map((result) => (
-          <GameCard key={result.id} game={result} />
-        ))}
+        {(results as Game[]) &&
+          results.map((result) => <GameCard key={result.id} game={result} />)}
       </SimpleGrid>
     </>
   );

@@ -1,37 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from './store';
+import store, { AppDispatch, RootState } from './store';
 import { useEffect } from 'react';
-import { fetchGames } from './Games/GamesAction';
-import { fetchGenres } from './Genres/GenresAction';
+import { fetchEntities } from './Entity/EntityAction';
+import { selectResults, selectIsLoading, selectError } from './selectors';
 
-export function useGames() {
-  const isLoading = useSelector((state: RootState) => state.game.isLoading);
-  const results = useSelector(
-    (state: RootState) => state.game.response.results,
+//Call the API and gets the state for the respective entities
+export function useEntities<T>(entity: string) {
+  const results = useSelector((state: RootState) =>
+    selectResults(state, entity),
+  ) as T[];
+  const isLoading = useSelector((state: RootState) =>
+    selectIsLoading(state, entity),
   );
-  const error = useSelector((state: RootState) => state.game.error);
+  const error = useSelector((state: RootState) => selectError(state, entity));
 
   const dispatch = useDispatch<AppDispatch>();
 
+  // Fetch the entity data when the component mounts or when entity changes
   useEffect(() => {
-    dispatch(fetchGames());
-  }, [dispatch]);
+    dispatch(fetchEntities<T>(entity));
+  }, [dispatch, entity]);
 
-  return { isLoading, results, error, dispatch };
-}
+  console.log(store.getState());
 
-export function useGenres() {
-  const isLoading = useSelector((state: RootState) => state.genre.isLoading);
-  const results = useSelector(
-    (state: RootState) => state.genre.response.results,
-  );
-  const error = useSelector((state: RootState) => state.genre.error);
-
-  const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    dispatch(fetchGenres());
-  }, [dispatch]);
-
-  return { isLoading, results, error, dispatch };
+  return { results, error, isLoading, dispatch };
 }
