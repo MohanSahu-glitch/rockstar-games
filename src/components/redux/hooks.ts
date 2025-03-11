@@ -8,9 +8,12 @@ import {
   selectError,
   selectGenre,
 } from './selectors';
-import { Game, Genre } from '../../types';
+import { Game, Genre, Platform } from '../../types';
 
-//Call the API and gets the state for the respective entities
+/**
+ * Call the API and gets the state for the respective entities
+ * Pass the endpoint suffix to be appended to the Base URL, refer api-client.ts
+ */
 function useEntities<T>(entity: string) {
   const results = useSelector((state: RootState) =>
     selectResults(state, entity),
@@ -43,3 +46,5 @@ function useEntities<T>(entity: string) {
 
 export const useGames = () => useEntities<Game>('games');
 export const useGenres = () => useEntities<Genre>('genres');
+export const usePlatforms = () =>
+  useEntities<Platform>('platforms/lists/parents');
