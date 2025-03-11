@@ -1,4 +1,4 @@
-import { LOADING, SUCCESS, ERROR, CANCEL } from '../../../constants';
+import { LOADING, SUCCESS, ERROR, CANCEL, SELECT } from '../../../constants';
 import { EntitiesState, EntityAction } from '../../../types';
 
 const initialState: EntitiesState = {};
@@ -18,6 +18,7 @@ function entityReducer(
         response: { results: [], count: 0 },
         error: '',
         cancel: () => {},
+        selectedGenreId: '',
       }),
       isLoading: type === LOADING,
       response:
@@ -28,6 +29,8 @@ function entityReducer(
           : state[entity]?.response,
       error: type === ERROR ? (payload as string) : state[entity]?.error,
       cancel: type === CANCEL ? (payload as () => void) : state[entity]?.cancel,
+      selectedGenreId:
+        type === SELECT ? (payload as string) : state[entity]?.selectedGenreId,
     },
   };
 }

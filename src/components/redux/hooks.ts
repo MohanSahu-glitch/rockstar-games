@@ -1,8 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './store';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { fetchEntities } from './Entity/EntityAction';
-import { selectResults, selectIsLoading, selectError } from './selectors';
+import {
+  selectResults,
+  selectIsLoading,
+  selectError,
+  selectGenre,
+} from './selectors';
 import { Game, Genre } from '../../types';
 
 //Call the API and gets the state for the respective entities
@@ -14,15 +19,21 @@ function useEntities<T>(entity: string) {
     selectIsLoading(state, entity),
   );
   const error = useSelector((state: RootState) => selectError(state, entity));
+  const selectedGenreId = useSelector((state: RootState) =>
+    selectGenre(state, entity),
+  );
 
   const dispatch = useDispatch<AppDispatch>();
 
   // Fetch the entity data when the component mounts or when entity changes
   useEffect(() => {
-    dispatch(fetchEntities<T>(entity));
-  }, [dispatch, entity]);
+    dispatch(fetchEntities<T>(entity, { params: { genres: selectedGenreId } }));
+  }, [dispatch, entity, selectedGenreId]);
 
-  return { results, error, isLoading, dispatch };
+  return useMemo(
+    () => ({ results, error, isLoading, selectedGenreId, dispatch }),
+    [results, error, isLoading, selectedGenreId, dispatch],
+  );
 }
 
 export const useGames = () => useEntities<Game>('games');

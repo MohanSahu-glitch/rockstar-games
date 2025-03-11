@@ -6,7 +6,6 @@ import { Game } from '../types';
 
 const GameGrid = () => {
   const { results, error, isLoading } = useGames();
-
   return (
     <>
       {error && <Text>{error}</Text>}
@@ -17,7 +16,7 @@ const GameGrid = () => {
       >
         {isLoading &&
           Array.from({ length: 20 }).map((_, index) => (
-            <GameCardSkeleton key={index} />
+            <GameCardSkeleton key={index}/>
           ))}
         {(results as Game[]) &&
           results.map((result) => <GameCard key={result.id} game={result} />)}

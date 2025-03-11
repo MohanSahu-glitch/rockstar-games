@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios';
 import apiClient from './api-client';
 
 class HttpClient {
@@ -11,10 +12,11 @@ class HttpClient {
    * Get list of items from the specified endpoint database
    * Has a abort functionality which can be used when component unmounts
    */
-  async getAll<T>() {
+  async getAll<T>(requestConfig?: AxiosRequestConfig) {
     const controller = new AbortController();
     const response = await apiClient.get<T>(this.endpoint, {
       signal: controller.signal,
+      ...requestConfig,
     });
 
     return { response, cancel: () => controller.abort() };

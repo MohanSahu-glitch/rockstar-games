@@ -27,6 +27,7 @@ export type FetchEntity<T> = {
   response: EntityResponse<T>;
   error: string;
   cancel: () => void;
+  selectedGenreId: string;
 };
 
 export type EntityAction<T> = {

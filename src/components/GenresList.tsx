@@ -1,10 +1,19 @@
-import { HStack, Image, List, ListItem, Spinner, Text } from '@chakra-ui/react';
+import {
+  Button,
+  HStack,
+  Image,
+  List,
+  ListItem,
+  Spinner,
+} from '@chakra-ui/react';
 import { Genre } from '../types';
-import { useGenres } from './redux/hooks';
+import { useGames, useGenres } from './redux/hooks';
 import { getCroppedImageUrl } from '../helpers';
+import { selectGenreId } from './redux/Entity/EntityAction';
 
 const GenresList = () => {
   const { results, isLoading, error } = useGenres();
+  const { dispatch } = useGames();
 
   if (isLoading) {
     return <Spinner size="xl" />;
@@ -32,7 +41,13 @@ const GenresList = () => {
                   y: 400,
                 })}
               />
-              <Text fontSize="lg">{genre.name}</Text>
+              <Button
+                fontSize="lg"
+                variant="unstyled"
+                onClick={() => dispatch(selectGenreId(String(genre.id)))}
+              >
+                {genre.name}
+              </Button>
             </HStack>
           </ListItem>
         ))}

@@ -2,7 +2,8 @@ import { createSelector } from 'reselect';
 import { RootState } from './store';
 
 // Base selector: Gets the entity state from Redux
-const selectEntityState = (state: RootState, entity: string) => state[entity];
+const selectEntityState = (state: RootState, entity: string) =>
+  state[entity] || {};
 
 // Memoized selector: Extracts the results array
 export const selectResults = createSelector(
@@ -20,6 +21,12 @@ export const selectIsLoading = createSelector(
 export const selectError = createSelector(
   selectEntityState,
   (entityState) => entityState?.error,
+);
+
+// Memoized selector: Extracts the genre state
+export const selectGenre = createSelector(
+  selectEntityState,
+  (entityState) => entityState?.selectedGenreId,
 );
 
 /**
