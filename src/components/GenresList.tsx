@@ -13,7 +13,7 @@ import { selectGenreId } from './redux/Entity/EntityAction';
 
 const GenresList = () => {
   const { results, isLoading, error } = useGenres();
-  const { dispatch } = useGames();
+  const { selectedGenreId, dispatch } = useGames();
 
   if (isLoading) {
     return <Spinner size="xl" />;
@@ -30,7 +30,6 @@ const GenresList = () => {
             paddingY="5px"
             borderRadius="md"
             cursor="pointer"
-            _hover={{ bg: 'gray.500', transition: '0.2s' }}
           >
             <HStack>
               <Image
@@ -45,6 +44,9 @@ const GenresList = () => {
                 fontSize="lg"
                 variant="unstyled"
                 onClick={() => dispatch(selectGenreId(String(genre.id)))}
+                fontWeight={
+                  genre.id === Number(selectedGenreId) ? 'bold' : 'thin'
+                }
               >
                 {genre.name}
               </Button>
