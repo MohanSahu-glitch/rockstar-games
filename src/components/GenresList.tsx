@@ -42,7 +42,7 @@ const GenresList = () => {
               />
               <Button
                 fontSize="lg"
-                variant="unstyled"
+                variant="outline"
                 onClick={() => dispatch(selectGenreId(String(genre.id)))}
                 fontWeight={
                   genre.id === Number(selectedGenreId) ? 'bold' : 'thin'

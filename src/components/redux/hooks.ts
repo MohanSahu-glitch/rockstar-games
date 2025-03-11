@@ -27,7 +27,12 @@ function useEntities<T>(entity: string) {
 
   // Fetch the entity data when the component mounts or when entity changes
   useEffect(() => {
-    dispatch(fetchEntities<T>(entity, { params: { genres: selectedGenreId } }));
+    const params: Record<string, string> = {};
+    //Setting params only when genre is selected
+    if (selectedGenreId) {
+      params.genres = selectedGenreId;
+    }
+    dispatch(fetchEntities<T>(entity, { params }));
   }, [dispatch, entity, selectedGenreId]);
 
   return useMemo(
