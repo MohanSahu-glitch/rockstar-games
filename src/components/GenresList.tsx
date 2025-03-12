@@ -26,9 +26,9 @@ const GenresList = () => {
   if (error) {
     return null;
   }
-  
+
   return (
-    <List>
+    <List pt={10}>
       {(results as Genre[]) &&
         results.map((genre) => (
           <ListItem
