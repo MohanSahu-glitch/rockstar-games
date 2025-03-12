@@ -1,20 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from './store';
+import { AppDispatch, RootState } from '../store';
 import { useEffect, useMemo } from 'react';
-import { fetchEntities } from './Entity/EntityAction';
+import { fetchEntities } from '../Entity/EntityAction';
 import {
   selectResults,
   selectIsLoading,
   selectError,
   selectGenre,
-} from './selectors';
-import { Game, Genre, Platform } from '../../types';
+} from '../selectors';
 
 /**
  * Call the API and gets the state for the respective entities
  * Pass the endpoint suffix to be appended to the Base URL, refer api-client.ts
  */
-function useEntities<T>(entity: string) {
+export function useEntities<T>(entity: string) {
   const results = useSelector((state: RootState) =>
     selectResults(state, entity),
   ) as T[];
@@ -39,12 +38,7 @@ function useEntities<T>(entity: string) {
   }, [dispatch, entity, selectedGenreId]);
 
   return useMemo(
-    () => ({ results, error, isLoading, selectedGenreId, dispatch }),
-    [results, error, isLoading, selectedGenreId, dispatch],
+    () => ({ results, error, isLoading, selectedGenreId }),
+    [results, error, isLoading, selectedGenreId],
   );
 }
-
-export const useGames = () => useEntities<Game>('games');
-export const useGenres = () => useEntities<Genre>('genres');
-export const usePlatforms = () =>
-  useEntities<Platform>('platforms/lists/parents');

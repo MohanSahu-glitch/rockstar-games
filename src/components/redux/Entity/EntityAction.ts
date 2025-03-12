@@ -2,7 +2,14 @@ import { Dispatch } from 'redux';
 import { AxiosError, AxiosRequestConfig, CanceledError } from 'axios';
 import create from '../../../services/http-client';
 import { EntityAction, EntityResponse, Genre } from '../../../types';
-import { LOADING, SUCCESS, CANCEL, ERROR, SELECT } from '../../../constants';
+import {
+  LOADING,
+  SUCCESS,
+  CANCEL,
+  ERROR,
+  SELECT,
+  endpoint,
+} from '../../../constants';
 
 /**
  * Fetches the specified "entity" items from the API(Refer types.ts for more understanding).
@@ -38,7 +45,7 @@ export function fetchEntities<T>(
 export function selectGenreId(id: string): EntityAction<Genre> {
   return {
     type: SELECT,
-    entity: 'games',
+    entity: endpoint.games,
     payload: id,
   };
 }

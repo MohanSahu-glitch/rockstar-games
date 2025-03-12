@@ -7,13 +7,17 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import { Genre } from '../types';
-import { useGames, useGenres } from './redux/hooks';
 import { getCroppedImageUrl } from '../helpers';
 import { selectGenreId } from './redux/Entity/EntityAction';
+import { useGenres } from './redux/hooks/Genres/useGenres';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from './redux/store';
+import { useSelectedGenreId } from './redux/hooks/Games/useSelectedGenreId';
 
 const GenresList = () => {
   const { results, isLoading, error } = useGenres();
-  const { selectedGenreId, dispatch } = useGames();
+  const selectedGenreId = useSelectedGenreId();
+  const dispatch = useDispatch<AppDispatch>();
 
   if (isLoading) {
     return <Spinner size="xl" />;
