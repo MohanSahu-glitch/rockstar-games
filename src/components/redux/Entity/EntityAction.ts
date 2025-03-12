@@ -1,14 +1,15 @@
 import { Dispatch } from 'redux';
 import { AxiosError, AxiosRequestConfig, CanceledError } from 'axios';
 import create from '../../../services/http-client';
-import { EntityAction, EntityResponse, Genre } from '../../../types';
+import { EntityAction, EntityResponse, Genre, Platform } from '../../../types';
 import {
   LOADING,
   SUCCESS,
   CANCEL,
   ERROR,
-  SELECT,
+  SELECT_GENRE,
   endpoint,
+  SELECT_PLATFORM,
 } from '../../../constants';
 
 /**
@@ -42,9 +43,21 @@ export function fetchEntities<T>(
  * Filters games with selected genre.
  * API schema accepts Genre as a string in the headers
  */
-export function selectGenreId(id: string): EntityAction<Genre> {
+export function setGenreId(id: string): EntityAction<Genre> {
   return {
-    type: SELECT,
+    type: SELECT_GENRE,
+    entity: endpoint.games,
+    payload: id,
+  };
+}
+
+/**
+ * Filters games with selected platform
+ * API schema accepts Platforms as a string in the headers
+ */
+export function setPlatformId(id: string): EntityAction<Platform> {
+  return {
+    type: SELECT_PLATFORM,
     entity: endpoint.games,
     payload: id,
   };

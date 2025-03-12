@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { Genre } from '../types';
 import { getCroppedImageUrl } from '../helpers';
-import { selectGenreId } from './redux/Entity/EntityAction';
+import { setGenreId } from './redux/Entity/EntityAction';
 import { useGenres } from './redux/hooks/Genres/useGenres';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from './redux/store';
@@ -22,9 +22,11 @@ const GenresList = () => {
   if (isLoading) {
     return <Spinner size="xl" />;
   }
+
   if (error) {
     return null;
   }
+  
   return (
     <List>
       {(results as Genre[]) &&
@@ -47,7 +49,7 @@ const GenresList = () => {
               <Button
                 fontSize="lg"
                 variant="outline"
-                onClick={() => dispatch(selectGenreId(String(genre.id)))}
+                onClick={() => dispatch(setGenreId(String(genre.id)))}
                 fontWeight={
                   genre.id === Number(selectedGenreId) ? 'bold' : 'thin'
                 }

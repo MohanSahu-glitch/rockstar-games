@@ -28,6 +28,7 @@ export type FetchEntity<T> = {
   error: string;
   cancel: () => void;
   selectedGenreId: string;
+  selectedPlatformId: string;
 };
 
 export type EntityAction<T> = {

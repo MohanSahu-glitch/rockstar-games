@@ -6,7 +6,8 @@ import {
   selectResults,
   selectIsLoading,
   selectError,
-  selectGenre,
+  selectGenreId,
+  selectPlatformId,
 } from '../selectors';
 
 /**
@@ -14,6 +15,7 @@ import {
  * Pass the endpoint suffix to be appended to the Base URL, refer api-client.ts
  */
 export function useEntities<T>(entity: string) {
+
   const results = useSelector((state: RootState) =>
     selectResults(state, entity),
   ) as T[];
@@ -22,7 +24,10 @@ export function useEntities<T>(entity: string) {
   );
   const error = useSelector((state: RootState) => selectError(state, entity));
   const selectedGenreId = useSelector((state: RootState) =>
-    selectGenre(state, entity),
+    selectGenreId(state, entity),
+  );
+  const selectedPlatformId = useSelector((state: RootState) =>
+    selectPlatformId(state, entity),
   );
 
   const dispatch = useDispatch<AppDispatch>();
@@ -30,15 +35,21 @@ export function useEntities<T>(entity: string) {
   // Fetch the entity data when the component mounts or when entity changes
   useEffect(() => {
     const params: Record<string, string> = {};
-    //Setting params only when genre is selected
+
+    //Setting genre params only when genre is selected
     if (selectedGenreId) {
       params.genres = selectedGenreId;
     }
+    //Setting platforms params only when platform is selected
+    if (selectedPlatformId) {
+      params.platforms = selectedPlatformId;
+    }
+
     dispatch(fetchEntities<T>(entity, { params }));
-  }, [dispatch, entity, selectedGenreId]);
+  }, [dispatch, entity, selectedGenreId, selectedPlatformId]);
 
   return useMemo(
-    () => ({ results, error, isLoading, selectedGenreId }),
-    [results, error, isLoading, selectedGenreId],
+    () => ({ results, error, isLoading }),
+    [results, error, isLoading],
   );
 }
