@@ -22,7 +22,7 @@ function entityReducer(
     [entity]: {
       ...(state[entity] || {
         isLoading: false,
-        response: { results: [], count: 0 },
+        response: { results: [] },
         error: '',
         cancel: () => {},
         selectedGenreId: '',
@@ -34,6 +34,8 @@ function entityReducer(
           ? {
               results: payload as unknown[],
             }
+          : type === LOADING
+          ? { results: [] } //Clears old results when loading
           : state[entity]?.response,
       error: type === ERROR ? (payload as string) : state[entity]?.error,
       cancel: type === CANCEL ? (payload as () => void) : state[entity]?.cancel,
