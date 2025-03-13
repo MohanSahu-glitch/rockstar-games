@@ -1,8 +1,9 @@
-import { Grid, GridItem, Show } from '@chakra-ui/react';
+import { Grid, GridItem, HStack, Show } from '@chakra-ui/react';
 import NavBar from './components/NavBar';
 import GameGrid from './components/GameGrid';
 import GenresList from './components/GenresList';
 import PlatformsDropdown from './components/PlatformsDropdown';
+import SortDropdown from './components/SortDropdown';
 
 function App() {
   return (
@@ -21,7 +22,10 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <PlatformsDropdown />
+        <HStack>
+          <PlatformsDropdown />
+          <SortDropdown />
+        </HStack>
         <GameGrid />
       </GridItem>
     </Grid>
