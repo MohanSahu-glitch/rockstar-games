@@ -8,6 +8,7 @@ import {
   selectError,
   selectGenreId,
   selectPlatformId,
+  selectSortName,
 } from '../selectors';
 
 /**
@@ -15,7 +16,6 @@ import {
  * Pass the endpoint suffix to be appended to the Base URL, refer api-client.ts
  */
 export function useEntities<T>(entity: string) {
-
   const results = useSelector((state: RootState) =>
     selectResults(state, entity),
   ) as T[];
@@ -28,6 +28,9 @@ export function useEntities<T>(entity: string) {
   );
   const selectedPlatformId = useSelector((state: RootState) =>
     selectPlatformId(state, entity),
+  );
+  const selectedSort = useSelector((state: RootState) =>
+    selectSortName(state, entity),
   );
 
   const dispatch = useDispatch<AppDispatch>();
@@ -45,8 +48,13 @@ export function useEntities<T>(entity: string) {
       params.platforms = selectedPlatformId;
     }
 
+    //Setting ordering params only when sort is selected
+    if (selectedSort) {
+      params.ordering = selectedSort;
+    }
+
     dispatch(fetchEntities<T>(entity, { params }));
-  }, [dispatch, entity, selectedGenreId, selectedPlatformId]);
+  }, [dispatch, entity, selectedGenreId, selectedPlatformId, selectedSort]);
 
   return useMemo(
     () => ({ results, error, isLoading }),

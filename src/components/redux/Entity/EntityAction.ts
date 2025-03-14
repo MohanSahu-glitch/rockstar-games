@@ -10,6 +10,7 @@ import {
   SELECT_GENRE,
   endpoint,
   SELECT_PLATFORM,
+  SELECT_SORT,
 } from '../../../constants';
 
 /**
@@ -60,5 +61,13 @@ export function setPlatformId(id: string): EntityAction<Platform> {
     type: SELECT_PLATFORM,
     entity: endpoint.games,
     payload: id,
+  };
+}
+
+export function setSortName(name: string): EntityAction<string> {
+  return {
+    type: SELECT_SORT,
+    entity: endpoint.games,
+    payload: name,
   };
 }

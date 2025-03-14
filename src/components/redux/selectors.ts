@@ -48,10 +48,18 @@ export const selectGenreId = createSelector(
   (entityState) => entityState?.selectedGenreId ?? '',
 );
 
-/** 
+/**
  * Memoized selector: Extracts the selected genre id
- */ 
+ */
 export const selectPlatformId = createSelector(
   [selectEntityState],
   (entityState) => entityState?.selectedPlatformId ?? '',
+);
+
+/**
+ * Memoized selector: Extracts the selected sort name
+ */
+export const selectSortName = createSelector(
+  [selectEntityState],
+  (entityState) => entityState?.selectedSort ?? '',
 );

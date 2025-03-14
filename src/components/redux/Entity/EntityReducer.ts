@@ -5,6 +5,7 @@ import {
   CANCEL,
   SELECT_GENRE,
   SELECT_PLATFORM,
+  SELECT_SORT,
 } from '../../../constants';
 import { EntitiesState, EntityAction } from '../../../types';
 
@@ -27,6 +28,7 @@ function entityReducer(
         cancel: () => {},
         selectedGenreId: '',
         selectedPlatformId: '',
+        selectedSort: '',
       }),
       isLoading: type === LOADING,
       response:
@@ -47,6 +49,10 @@ function entityReducer(
         type === SELECT_PLATFORM
           ? (payload as string)
           : state[entity]?.selectedPlatformId,
+      selectedSort:
+        type === SELECT_SORT
+          ? (payload as string)
+          : state[entity]?.selectedSort,
     },
   };
 }

@@ -29,6 +29,7 @@ export type FetchEntity<T> = {
   cancel: () => void;
   selectedGenreId: string;
   selectedPlatformId: string;
+  selectedSort: string;
 };
 
 export type EntityAction<T> = {
@@ -42,4 +43,10 @@ export type EntitiesState = Record<string, FetchEntity<unknown>>;
 export type Dimension = {
   x: number;
   y: number;
+};
+
+export type SortList = {
+  id: number;
+  value: string;
+  label: string;
 };
