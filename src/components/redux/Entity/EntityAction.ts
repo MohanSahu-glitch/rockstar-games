@@ -64,6 +64,10 @@ export function setPlatformId(id: string): EntityAction<Platform> {
   };
 }
 
+/**
+ * Filters games with selected sort
+ * API schema accepts Platforms as a string in the headers
+ */
 export function setSortName(name: string): EntityAction<string> {
   return {
     type: SELECT_SORT,
