@@ -63,3 +63,11 @@ export const selectSortName = createSelector(
   [selectEntityState],
   (entityState) => entityState?.selectedSort ?? '',
 );
+
+/**
+ * Memoized selector: Extracts the selected search name
+ */
+export const selectSearch = createSelector(
+  [selectEntityState],
+  (entityState) => entityState?.search ?? '',
+);

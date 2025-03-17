@@ -30,6 +30,7 @@ export type FetchEntity<T> = {
   selectedGenreId: string;
   selectedPlatformId: string;
   selectedSort: string;
+  search: string;
 };
 
 export type EntityAction<T> = {

@@ -9,6 +9,7 @@ import {
   selectGenreId,
   selectPlatformId,
   selectSortName,
+  selectSearch,
 } from '../selectors';
 
 /**
@@ -32,6 +33,7 @@ export function useEntities<T>(entity: string) {
   const selectedSort = useSelector((state: RootState) =>
     selectSortName(state, entity),
   );
+  const search = useSelector((state: RootState) => selectSearch(state, entity));
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -53,8 +55,19 @@ export function useEntities<T>(entity: string) {
       params.ordering = selectedSort;
     }
 
+    if (search) {
+      params.search = search;
+    }
+
     dispatch(fetchEntities<T>(entity, { params }));
-  }, [dispatch, entity, selectedGenreId, selectedPlatformId, selectedSort]);
+  }, [
+    dispatch,
+    entity,
+    selectedGenreId,
+    selectedPlatformId,
+    selectedSort,
+    search,
+  ]);
 
   return useMemo(
     () => ({ results, error, isLoading }),

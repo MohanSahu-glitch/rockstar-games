@@ -7,6 +7,7 @@ export const CANCEL = 'CANCEL';
 export const SELECT_GENRE = 'SELECT_GENRE';
 export const SELECT_PLATFORM = 'SELECT_PLATFORM';
 export const SELECT_SORT = 'SELECT_SORT';
+export const SELECT_SEARCH = 'SELECT_SEARCH';
 
 export enum endpoint {
   games = 'games',

@@ -6,6 +6,7 @@ import {
   SELECT_GENRE,
   SELECT_PLATFORM,
   SELECT_SORT,
+  SELECT_SEARCH,
 } from '../../../constants';
 import { EntitiesState, EntityAction } from '../../../types';
 
@@ -29,6 +30,7 @@ function entityReducer(
         selectedGenreId: '',
         selectedPlatformId: '',
         selectedSort: '',
+        search: '',
       }),
       isLoading: type === LOADING,
       response:
@@ -53,6 +55,8 @@ function entityReducer(
         type === SELECT_SORT
           ? (payload as string)
           : state[entity]?.selectedSort,
+      search:
+        type === SELECT_SEARCH ? (payload as string) : state[entity]?.search,
     },
   };
 }

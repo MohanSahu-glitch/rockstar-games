@@ -11,6 +11,7 @@ import {
   endpoint,
   SELECT_PLATFORM,
   SELECT_SORT,
+  SELECT_SEARCH,
 } from '../../../constants';
 
 /**
@@ -66,11 +67,21 @@ export function setPlatformId(id: string): EntityAction<Platform> {
 
 /**
  * Filters games with selected sort
- * API schema accepts Platforms as a string in the headers
  */
 export function setSortName(name: string): EntityAction<string> {
   return {
     type: SELECT_SORT,
+    entity: endpoint.games,
+    payload: name,
+  };
+}
+
+/**
+ * Filters games with search item
+ */
+export function setSearch(name: string | undefined): EntityAction<string> {
+  return {
+    type: SELECT_SEARCH,
     entity: endpoint.games,
     payload: name,
   };
