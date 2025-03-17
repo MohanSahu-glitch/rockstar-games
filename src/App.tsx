@@ -4,6 +4,7 @@ import GameGrid from './components/GameGrid';
 import GenresList from './components/GenresList';
 import PlatformsDropdown from './components/PlatformsDropdown';
 import SortDropdown from './components/SortDropdown';
+import Reset from './components/Reset';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Flex>
           <PlatformsDropdown />
           <SortDropdown />
+          <Reset />
         </Flex>
         <GameGrid />
       </GridItem>

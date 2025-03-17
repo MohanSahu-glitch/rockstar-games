@@ -41,20 +41,16 @@ export function useEntities<T>(entity: string) {
   useEffect(() => {
     const params: Record<string, string> = {};
 
-    //Setting genre params only when genre is selected
+    //Setting required params only if they are selected/used
     if (selectedGenreId) {
       params.genres = selectedGenreId;
     }
-    //Setting platforms params only when platform is selected
     if (selectedPlatformId) {
       params.platforms = selectedPlatformId;
     }
-
-    //Setting ordering params only when sort is selected
     if (selectedSort) {
       params.ordering = selectedSort;
     }
-
     if (search) {
       params.search = search;
     }
