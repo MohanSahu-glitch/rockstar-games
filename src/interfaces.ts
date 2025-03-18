@@ -1,13 +1,20 @@
-import { Game, Platform } from "./types";
+import { IconType } from 'react-icons';
+import { Game, Platform } from './types';
 
 export interface GameCardProps {
-    game: Game
+  game: Game;
 }
 
 export interface PlatformIconListProps {
-    platforms: Platform[]
+  platforms: Platform[];
 }
 
 export interface CriticScoreProps {
-    score: number
+  score: number;
+}
+
+export interface EmptyStateProps {
+  message?: string;
+  imageSrc?: IconType;
+  onRetry?: () => void;
 }

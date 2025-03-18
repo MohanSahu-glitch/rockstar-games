@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { fetchEntities } from '../Entity/EntityAction';
 import {
   selectResults,
@@ -37,23 +37,14 @@ export function useEntities<T>(entity: string) {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  // Fetch the entity data when the component mounts or when entity changes
-  useEffect(() => {
+  const fetchData = useCallback(() => {
     const params: Record<string, string> = {};
 
-    //Setting required params only if they are selected/used
-    if (selectedGenreId) {
-      params.genres = selectedGenreId;
-    }
-    if (selectedPlatformId) {
-      params.platforms = selectedPlatformId;
-    }
-    if (selectedSort) {
-      params.ordering = selectedSort;
-    }
-    if (search) {
-      params.search = search;
-    }
+    //Setting params only when they are selected on the UI
+    if (selectedGenreId) params.genres = selectedGenreId;
+    if (selectedPlatformId) params.platforms = selectedPlatformId;
+    if (selectedSort) params.ordering = selectedSort;
+    if (search) params.search = search;
 
     dispatch(fetchEntities<T>(entity, { params }));
   }, [
@@ -65,8 +56,16 @@ export function useEntities<T>(entity: string) {
     search,
   ]);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const retry = useCallback(() => {
+    fetchData();
+  }, [fetchData]);
+
   return useMemo(
-    () => ({ results, error, isLoading }),
-    [results, error, isLoading],
+    () => ({ results, error, isLoading, retry }),
+    [results, error, isLoading, retry],
   );
 }
