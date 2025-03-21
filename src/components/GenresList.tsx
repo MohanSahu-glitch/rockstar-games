@@ -12,11 +12,11 @@ import { setGenreId } from './redux/Entity/EntityAction';
 import { useGenres } from './redux/hooks/Genres/useGenres';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from './redux/store';
-import { useSelectedGenreId } from './redux/hooks/Games/useSelectedGenreId';
+import { useGamesState } from './redux/hooks/Games/useGamesState';
 
 const GenresList = () => {
   const { results, isLoading, error } = useGenres();
-  const selectedGenreId = useSelectedGenreId();
+  const { selectedGenreId } = useGamesState();
   const dispatch = useDispatch<AppDispatch>();
 
   if (isLoading) {

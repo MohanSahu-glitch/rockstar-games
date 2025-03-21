@@ -25,6 +25,14 @@ export const selectResults = createSelector(
 );
 
 /**
+ * Memoized selector: Extracts the count of the response
+ */
+export const selectCount = createSelector(
+  [selectEntityState], // Memoized input selector
+  (entityState) => entityState?.response?.count ?? 0,
+);
+
+/**
  * Memoized selector: Extracts the loading state
  */
 export const selectIsLoading = createSelector(
@@ -70,4 +78,12 @@ export const selectSortName = createSelector(
 export const selectSearch = createSelector(
   [selectEntityState],
   (entityState) => entityState?.search ?? '',
+);
+
+/**
+ * Memoized selector: Extracts the selected page number
+ */
+export const selectOnPage = createSelector(
+  [selectEntityState],
+  (entityState) => entityState?.onPage ?? 1,
 );

@@ -11,12 +11,12 @@ import { usePlatforms } from './redux/hooks/Platforms/usePlatforms';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from './redux/store';
 import { setPlatformId } from './redux/Entity/EntityAction';
-import { useSelectedPlatformid } from './redux/hooks/Games/useSelectedPlatformId';
+import { useGamesState } from './redux/hooks/Games/useGamesState';
 
 const PlatformsDropdown = () => {
   const { isLoading, error, results } = usePlatforms();
   const dispatch = useDispatch<AppDispatch>();
-  const selectedPlatformId = useSelectedPlatformid();
+  const { selectedPlatformId } = useGamesState();
 
   const selectedPlatformName =
     results.find((p) => String(p.id) === selectedPlatformId)?.name ||

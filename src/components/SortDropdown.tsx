@@ -11,11 +11,11 @@ import { sortList } from '../constants';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from './redux/store';
 import { setSortName } from './redux/Entity/EntityAction';
-import { useSelectedSort } from './redux/hooks/Games/useSelectedSort';
+import { useGamesState } from './redux/hooks/Games/useGamesState';
 
 const SortDropdown = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const selectedSort = useSelectedSort();
+  const { selectedSort } = useGamesState();
   const selectedSortName =
     'Order By: ' + sortList.find((p) => p.value === selectedSort)?.label;
   return (

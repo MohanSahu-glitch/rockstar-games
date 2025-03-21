@@ -12,6 +12,7 @@ import {
   SELECT_PLATFORM,
   SELECT_SORT,
   SELECT_SEARCH,
+  SELECT_PAGE,
 } from '../../../constants';
 
 /**
@@ -30,7 +31,7 @@ export function fetchEntities<T>(
       const { response, cancel } = await service.getAll<EntityResponse<T>>(
         requestConfig,
       );
-      dispatch({ type: SUCCESS, entity, payload: response.data.results });
+      dispatch({ type: SUCCESS, entity, payload: response.data });
       dispatch({ type: CANCEL, entity, payload: cancel });
     } catch (err) {
       if (err instanceof CanceledError) return;
@@ -84,5 +85,16 @@ export function setSearch(name: string | undefined): EntityAction<string> {
     type: SELECT_SEARCH,
     entity: endpoint.games,
     payload: name,
+  };
+}
+
+/**
+ * Fetches games with pagination
+ */
+export function setOnPage(page: number): EntityAction<string> {
+  return {
+    type: SELECT_PAGE,
+    entity: endpoint.games,
+    payload: page,
   };
 }

@@ -20,6 +20,7 @@ export type Platform = {
 
 export type EntityResponse<T> = {
   results: T[];
+  count: number;
 };
 
 export type FetchEntity<T> = {
@@ -31,12 +32,13 @@ export type FetchEntity<T> = {
   selectedPlatformId: string;
   selectedSort: string;
   search: string;
+  onPage: number;
 };
 
 export type EntityAction<T> = {
   type: string;
   entity: string; //Used for endpoint which concatenates with base URL. Refer api-client.ts
-  payload?: T[] | string | (() => void);
+  payload?: string | (() => void) | number | EntityResponse<T>;
 };
 
 export type EntitiesState = Record<string, FetchEntity<unknown>>;

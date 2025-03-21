@@ -5,6 +5,7 @@ import GenresList from './components/GenresList';
 import PlatformsDropdown from './components/PlatformsDropdown';
 import SortDropdown from './components/SortDropdown';
 import Reset from './components/Reset';
+import Pagination from './components/Pagination';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Reset />
         </Flex>
         <GameGrid />
+        <Pagination />
       </GridItem>
     </Grid>
   );
