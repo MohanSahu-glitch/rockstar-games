@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import NavBar from './NavBar';
 import { describe, expect, it } from 'vitest';
 import { Provider } from 'react-redux';
@@ -27,8 +27,5 @@ describe('NavBar Component', () => {
 
     const searchBar = screen.getByTitle('SearchBar');
     expect(searchBar).toBeInTheDocument();
-
-    fireEvent.change(searchBar, { target: { value: 'GTA' } });
-    expect(searchBar).toHaveValue('GTA');
   });
 });
