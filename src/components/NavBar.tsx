@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 const NavBar = () => {
   return (
     <HStack padding="15px" width="100%" wrap="wrap">
-      <Image src={rockstar} boxSize="60px" />
+      <Image src={rockstar} boxSize="60px" alt="Rockstar Logo" />
 
       {/* Flexbox for alignment */}
       <Flex

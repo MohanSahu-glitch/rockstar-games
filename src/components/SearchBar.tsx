@@ -26,6 +26,7 @@ const SearchBar = () => {
     <InputGroup>
       <InputLeftElement children={<BsSearch />} />
       <Input
+        title='SearchBar'
         ref={inputRef}
         placeholder="Search games..."
         borderRadius={20}

@@ -5,6 +5,7 @@ const ToggleTheme = () => {
   return (
     <HStack>
       <Switch
+        title='toggleTheme'
         colorScheme="purple"
         isChecked={colorMode === 'dark'}
         onChange={toggleColorMode}
