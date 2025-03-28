@@ -1,11 +1,9 @@
-import { configure, render, screen, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { configure, screen, waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import SearchBar from './SearchBar';
 import userEvent from '@testing-library/user-event';
 import * as EntityAction from './redux/Entity/EntityAction';
-import store from './redux/store';
-import { ReactNode } from 'react';
+import { rtlRender } from '../helpers';
 
 let input: HTMLElement;
 const searchTerms = {
@@ -14,9 +12,6 @@ const searchTerms = {
   specialChars: '!@#$%^',
 };
 configure({ testIdAttribute: 'id' });
-const rtlRender = (children: ReactNode) => {
-  render(<Provider store={store}>{children}</Provider>);
-};
 
 describe('Search Bar component', () => {
   beforeEach(() => {
@@ -27,6 +22,10 @@ describe('Search Bar component', () => {
     vi.spyOn(EntityAction, 'setSearch');
     rtlRender(<SearchBar />);
     input = screen.getByTestId('SearchBar');
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it('Validate Search Bar rendering', async () => {
